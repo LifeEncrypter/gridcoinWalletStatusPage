@@ -2,33 +2,21 @@
 
 class GridcoinRPC extends Thread
 {
-    //private $host;
-    //private $port;
-    //private $rpcUser;
-    //private $rpcPass;
-    //private $proto;
-
     private array $curlOpts;
 
     /**
      * GridcoinRPC constructor.
+     * Setup Curl Options array for reuse
      */
     public function __construct()
     {
         $config = include('config.php');
-
-        //$this->host     = $config['host'];
-        //$this->port     = $config['port'];
-        //$this->rpcUser  = $config['rpcUser'];
-        //$this->rpcPass  = $config['rpcPass'];
-        //$this->proto    = $config['proto'];
 
         $this->curlOpts = array(
             CURLOPT_URL            => "{$config['proto']}://{$config['host']}:{$config['rpcPort']}/{$config['url']}",
             CURLOPT_HTTPAUTH       => CURLAUTH_BASIC,
             CURLOPT_USERPWD        => "{$config['rpcUser']}:{$config['rpcPass']}",
             CURLOPT_RETURNTRANSFER => true,
-            //CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_MAXREDIRS      => 3,
             CURLOPT_HTTPHEADER     => array('Content-type: application/json'),
             CURLOPT_POST           => true
@@ -44,8 +32,7 @@ class GridcoinRPC extends Thread
 
         $postParams = json_encode(array(
             'method' => $method,
-            'params' => $params//,
-            //'id'     => $this->id
+            'params' => $params
         ));
 
         curl_setopt($curlCall, CURLOPT_POSTFIELDS, $postParams);
