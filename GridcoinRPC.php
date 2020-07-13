@@ -13,7 +13,7 @@ class GridcoinRPC
         $config = include('config.php');
 
         $this->curlOpts = array(
-            CURLOPT_URL            => "{$config['proto']}://{$config['host']}:{$config['rpcPort']}/{$config['url']}",
+            CURLOPT_URL            => "{$config['proto']}://{$config['host']}:{$config['rpcPort']}/{$config['urlPath']}",
             CURLOPT_HTTPAUTH       => CURLAUTH_BASIC,
             CURLOPT_USERPWD        => "{$config['rpcUser']}:{$config['rpcPass']}",
             CURLOPT_RETURNTRANSFER => true,
