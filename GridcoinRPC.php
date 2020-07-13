@@ -1,6 +1,6 @@
 <?php
 
-class GridcoinRPC extends Thread
+class GridcoinRPC
 {
     private array $curlOpts;
 
