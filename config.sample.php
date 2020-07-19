@@ -5,5 +5,5 @@ return [
     'rpcUser'   => 'user',
     'rpcPass'   => 'password',
     'proto'     => 'http',
-    'urlPath'   => null
+    'urlPath'   => null,
 ];

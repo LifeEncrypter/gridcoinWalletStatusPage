@@ -42,15 +42,15 @@ img {
   max-height: 100%;
 }
 
-#green {
+.content.green {
   border: 3px solid #7FFF7F;
 }
 
-#orange {
+.content.orange {
   border: 3px solid #f7911b;
 }
 
-#red {
+.content.red {
   border: 3px solid #F74100;
 }
 
