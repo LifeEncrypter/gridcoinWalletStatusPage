@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  lang="de">
+<html lang="de">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,48 +21,48 @@
         $newestblock = $gridcoin->multiCall(array(array("getblockcount", [])));
         $calls = array(
             array("getnetworkinfo", []),
-            array("showblock", [$newestblock["getblockcount"]])
+            array("showblock", [$newestblock["getblockcount"]]),
+            array("getwalletinfo", [])
         );
         $nodeStatus = $gridcoin->multiCall($calls);
-        ?>
-        <div class='wrapper'>
+        echo "<div class='wrapper'>
           <div class='content'>
-            <div id='nodeVersion'>Version: <?php echo $nodeStatus['getnetworkinfo']['version']?></div>
+            <div id='nodeVersion'>Version: " . $nodeStatus['getnetworkinfo']['version'] . "</div>
           </div>
-          <?php
-          echo "<div id='connectionCount' class='content ";
-            if($nodeStatus['getnetworkinfo']['connections'] > 8) {
+          <div id='connectionCount' class='content ";
+            if($nodeStatus['getnetworkinfo']['connections'] > 8)
+            {
               echo "green'>";
-            } else if($nodeStatus['getnetworkinfo']['connections'] > 0) {
+            } else if($nodeStatus['getnetworkinfo']['connections'] > 0)
+            {
               echo "orange'>";
-            } else {
+            } else
+            {
               echo "red'>";
             }
-            echo "Connections: " . $nodeStatus['getnetworkinfo']['connections'];
-            ?>
-          </div>
-          <!-- $getinfo = $gridcoin->getinfo();
-          if(array_key_exists('unlocked_until', $getinfo)) {
-              echo "<div class='content' ";
-              if ($getinfo['unlocked_until'] != 0) {
-                  echo "id='green'>";
-                  echo "Staking";
-              } else {
-                  echo "id='red'>";
-                  echo "Wallet locked";
+            echo "Connections: " . $nodeStatus['getnetworkinfo']['connections'] . "</div>";
+          if(array_key_exists('unlocked_until', $nodeStatus['getwalletinfo']) || array_key_exists('staking', $nodeStatus['getwalletinfo']))
+          {
+              echo "<div id='walletLock' class='content ";
+              if ($nodeStatus['getwalletinfo']['unlocked_until'] != 0 || $nodeStatus['getwalletinfo']['staking'] == true)
+              {
+                  echo "green'>
+                    Staking</div>";
+              } else
+              {
+                  echo "red'>
+                    Wallet locked</div>";
               }
-              echo "</div>";
-          } -->
-          <div class='content'>
+          }
+          echo "<div class='content'>
             <div class='contentList'>
-              <?php
-              echo "<b>Newest Block:</b><br><div id='blockCount'>" . $nodeStatus['showblock']['height'] . "</div><br>";
-              echo "<b>Difficulty:</b><br><div id='difficulty'>" . $nodeStatus['showblock']['difficulty'] . "</div><br>";
-              echo "<b>Blockhash:</b><br><div id='hash'>" . $nodeStatus['showblock']['hash'] . "</div><br>";
-              echo "<b>Mined by:</b><br><div id='CPID'>" . $nodeStatus['showblock']['CPID'] . "</div>";
-              echo "<b>With client version:</b><br><div id='clientVersion'>" . $nodeStatus['showblock']['ClientVersion'] . "</div><br>";
-              ?>
-            </div></div></div>
+              <b>Newest Block:</b><br><div id='blockCount'>" . $nodeStatus['showblock']['height'] . "</div><br>
+              <b>Difficulty:</b><br><div id='difficulty'>" . $nodeStatus['showblock']['difficulty'] . "</div><br>
+              <b>Blockhash:</b><br><div id='hash'>" . $nodeStatus['showblock']['hash'] . "</div><br>
+              <b>Mined by:</b><br><div id='CPID'>" . $nodeStatus['showblock']['CPID'] . "</div>
+              <b>With client version:</b><br><div id='clientVersion'>" . $nodeStatus['showblock']['ClientVersion'] . "</div><br>
+              </div></div></div>";
+          ?>
         <script>
             setInterval(getFreshData, 30000);
 
@@ -73,27 +73,47 @@
             
             function updateData(data)
             {
-                document.getElementById('nodeVersion').innerText = "Version: " + data.getnetworkinfo.version;
+                if(!(data.getnetworkinfo === undefined))
+                {
+                    document.getElementById('nodeVersion').innerText = "Version: " + data.getnetworkinfo.version;
 
-                let newConnectionCount = data.getnetworkinfo.connections;
-                let conEl = document.getElementById("connectionCount");
-                if(newConnectionCount > 8)
-                {
-                    conEl.className = "content green";
-                } else if( newConnectionCount > 0)
-                {
-                    conEl.className = "content orange";
-                } else
-                {
-                    conEl.className = "content red";
+                    let newConnectionCount = data.getnetworkinfo.connections;
+                    let conEl = document.getElementById("connectionCount");
+                    if(newConnectionCount > 8)
+                    {
+                        conEl.className = "content green";
+                    } else if( newConnectionCount > 0)
+                    {
+                        conEl.className = "content orange";
+                    } else
+                    {
+                        conEl.className = "content red";
+                    }
+                    conEl.innerText = newConnectionCount;
                 }
-                conEl.innerText = newConnectionCount;
 
-                document.getElementById('blockCount').innerText = data.showblock.height;
-                document.getElementById('difficulty').innerText = data.showblock.difficulty;
-                document.getElementById('hash').innerText = data.showblock.hash;
-                document.getElementById('CPID').innerText = data.showblock.CPID;
-                document.getElementById('clientVersion').innerText = data.showblock.ClientVersion;
+                if(!(data.getwalletinfo === undefined))
+                {
+                    let walletLock = document.getElementById('walletLock');
+                    if(data.getwalletinfo.staking)
+                    {
+                        walletLock.innerText = "Staking";
+                        walletLock.className = "content green";
+                    } else
+                    {
+                        walletLock.innerText = "Wallet locked";
+                        walletLock.className = "conetnt red";
+                    }
+                }
+
+                if(!(data.showblock === undefined))
+                {
+                    document.getElementById('blockCount').innerText = data.showblock.height;
+                    document.getElementById('difficulty').innerText = data.showblock.difficulty;
+                    document.getElementById('hash').innerText = data.showblock.hash;
+                    document.getElementById('CPID').innerText = data.showblock.CPID;
+                    document.getElementById('clientVersion').innerText = data.showblock.ClientVersion;
+                }
             }
         </script>
     </main>
