@@ -10,7 +10,7 @@ class GridcoinRPC
      */
     public function __construct()
     {
-        $config = include('config.php');
+        $config = require_once('config.php');
 
         $this->curlOpts = array(
             CURLOPT_URL            => "{$config['proto']}://{$config['host']}:{$config['rpcPort']}/{$config['urlPath']}",
