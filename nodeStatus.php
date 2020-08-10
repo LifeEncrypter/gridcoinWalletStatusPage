@@ -21,9 +21,9 @@ foreach ($networkInfoPriv as $entry)
     unset($data['getnetworkinfo']["$entry"]);
 }
 
-if(array_key_exists('unlocked_until', $nodeStatus['getwalletinfo']) || array_key_exists('staking', $nodeStatus['getwalletinfo']))
+if(array_key_exists('unlocked_until', $data['getwalletinfo']) || array_key_exists('staking', $data['getwalletinfo']))
 {
-    if ($nodeStatus['getwalletinfo']['unlocked_until'] != 0 || $nodeStatus['getwalletinfo']['staking'] == true)
+    if ($data['getwalletinfo']['unlocked_until'] != 0 || $data['getwalletinfo']['staking'] == true)
     {
         unset($data['getwalletinfo']);
         $data['getwalletinfo']['staking'] = true;
