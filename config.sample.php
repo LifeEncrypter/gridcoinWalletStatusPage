@@ -6,4 +6,6 @@ return [
     'rpcPass'   => 'password',
     'proto'     => 'http',
     'urlPath'   => null,
+    'siteName'  => 'grc.example.com',
+    'siteDescription' => 'Gridcoin Node stats'
 ];
