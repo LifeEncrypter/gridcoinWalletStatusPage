@@ -61,8 +61,8 @@
               <b>Newest Block:</b><br><div id='blockCount'>" . $nodeStatus['showblock']['height'] . "</div><br>
               <b>Difficulty:</b><br><div id='difficulty'>" . $nodeStatus['showblock']['difficulty'] . "</div><br>
               <b>Blockhash:</b><br><div id='hash'>" . $nodeStatus['showblock']['hash'] . "</div><br>
-              <b>Mined by:</b><br><div id='CPID'>" . $nodeStatus['showblock']['CPID'] . "</div>
-              <b>With client version:</b><br><div id='clientVersion'>" . $nodeStatus['showblock']['ClientVersion'] . "</div><br>
+              <b>Mined by:</b><br><div id='CPID'>" . $nodeStatus['showblock']['claim']['mining_id'] . "</div>
+              <b>With client version:</b><br><div id='client_version'>" . $nodeStatus['showblock']['claim']['client_version'] . "</div><br>
               </div></div></div>";
           ?>
     </main>
