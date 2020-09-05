@@ -39,7 +39,7 @@ function updateData(data)
         } else
         {
             walletLock.innerText = "Wallet locked";
-            walletLock.className = "conetnt red";
+            walletLock.className = "content red";
         }
     }
 
@@ -48,7 +48,7 @@ function updateData(data)
         document.getElementById('blockCount').innerText = data.showblock.height;
         document.getElementById('difficulty').innerText = data.showblock.difficulty;
         document.getElementById('hash').innerText = data.showblock.hash;
-        document.getElementById('CPID').innerText = data.showblock.CPID;
-        document.getElementById('clientVersion').innerText = data.showblock.ClientVersion;
+        document.getElementById('CPID').innerText = data.showblock.claim.mining_id;
+        document.getElementById('client_version').innerText = data.showblock.claim.client_version;
     }
 }
