@@ -58,7 +58,7 @@
           }
           echo "<div class='content'>
             <div class='contentList'>
-              <b>Newest Block:</b><br><div id='blockCount'>" . $nodeStatus['showblock']['height'] . "</div><br>
+              <b>Newest Block:</b><br><div id='blockCount'><a href='block/?height=" . $nodeStatus['showblock']['height'] . "'>" . $nodeStatus['showblock']['height'] . "</a>" . "</div><br>
               <b>Difficulty:</b><br><div id='difficulty'>" . $nodeStatus['showblock']['difficulty'] . "</div><br>
               <b>Blockhash:</b><br><div id='hash'>" . $nodeStatus['showblock']['hash'] . "</div><br>
               <b>Mined by:</b><br><div id='CPID'>" . $nodeStatus['showblock']['claim']['mining_id'] . "</div>
