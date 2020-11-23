@@ -5,9 +5,7 @@ function block()
     require_once('../GridcoinRPC.php');
     $gridcoin = new GridcoinRPC();
 
-    echo $_GET;
-
-    if (empty($_GET['height'])) {
+    if (empty($_GET['height']) || $_GET["height"] == "/") {
         //getCurrentBlockCount
         $blockIndex = $gridcoin->multiCall(array(array("getblockcount", [])))["getblockcount"];
     } else {
