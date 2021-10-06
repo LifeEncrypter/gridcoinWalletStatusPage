@@ -26,7 +26,7 @@ function updateData(data)
         {
             conEl.className = "content red";
         }
-        conEl.innerText = newConnectionCount;
+        conEl.innerText = "Connections: " + newConnectionCount;
     }
 
     if(!(data.getwalletinfo === undefined))
