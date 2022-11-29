@@ -68,7 +68,7 @@
     </main>
     <footer>
       <!--<img alt="Gridcoin Logo" src="https://raw.githubusercontent.com/gridcoin-community/Gridcoin-Marketing/master/Gridcoin%20Logos/PNG%20Format/Horizontal/GRCHorizontal_Purple_Transparent.png">-->
-      <img alt="Gridcoin Horizontal Logo" src="images/GRCHorizontal_Purple_Transparent.webp">
+      <img class='footer' alt="Gridcoin Horizontal Logo" src="images/GRCHorizontal_Purple_Transparent.webp">
     </footer>
   </body>
 </html>

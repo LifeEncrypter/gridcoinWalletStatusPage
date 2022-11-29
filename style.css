@@ -42,6 +42,10 @@ img {
   max-height: 100%;
 }
 
+img.footer {
+  max-height: 180px;
+}
+
 .content.green {
   border: 3px solid #7FFF7F;
 }
