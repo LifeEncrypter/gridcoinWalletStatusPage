@@ -21,20 +21,15 @@ foreach ($networkInfoPriv as $entry)
     unset($data['getnetworkinfo']["$entry"]);
 }
 
-if(array_key_exists('unlocked_until', $data['getwalletinfo']) || array_key_exists('staking', $data['getwalletinfo']))
+// Check if wallet is either unlocked greater 0 or if staking is true
+if((array_key_exists('unlocked_until', $data['getwalletinfo']) && $data['getwalletinfo']['unlocked_until'] != 0) || (array_key_exists('staking', $data['getwalletinfo']) && $data['getwalletinfo']['staking']))
 {
-    if ($data['getwalletinfo']['unlocked_until'] != 0 || $data['getwalletinfo']['staking'] == true)
-    {
-        unset($data['getwalletinfo']);
-        $data['getwalletinfo']['staking'] = true;
-    } else
-    {
-        unset($data['getwalletinfo']);
-        $data['getwalletinfo']['staking'] = false;
-    }
+    unset($data['getwalletinfo']);
+    $data['getwalletinfo']['staking'] = true;
 } else
 {
     unset($data['getwalletinfo']);
+    $data['getwalletinfo']['staking'] = false;
 }
 
 header('Content-Type: application/json');
